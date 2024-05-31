@@ -44,9 +44,9 @@ function App() {
   console.log(newTodo);
   return (
     <>
-      <div className=" bg-[url('/fire.jpg')]  h-screen w-full mx-auto grid grid-cols-2">
-        <div className="overflow-x-auto w-3/4 mx-auto text-center mt-5">
-          <h3 className="mx-auto w-full text-center text-3xl font-bold mb-5">
+      <div className=" bg-[url('/fire.jpg')]  h-screen w-full mx-auto md:grid grid-cols-2 ">
+        <div className="overflow-x-auto w-3/4 mx-auto text-center md:mt-5">
+          <h3 className="mx-auto w-full text-center text-3xl font-bold mb-5 mt-5">
             Activity List
           </h3>
 
@@ -105,8 +105,10 @@ function App() {
             {/* foot */}
           </table>
         </div>
-        <div className="mx-auto w-3/4 mt-5">
-          <h1 className="text-3xl font-bold">Done: {getTodosDone().length}</h1>
+        <div className="mx-auto w-3/4 md:mt-5">
+          <h1 className="text-3xl font-bold mt-5">
+            Done: {getTodosDone().length}
+          </h1>
           {/* Kita akan buat apa yang kita ketik disini bakal ditampung ke dalam state */}
           <input
             type="text"
