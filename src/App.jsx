@@ -25,73 +25,102 @@ function App() {
 
   const handleDelete = (idx) => {
     dispatch(deleteTodo(idx));
-    toast.success("Delete Todo Success");
+    toast.success("Delete activity success");
   };
 
   const handleIsDone = (index, value) => {
     dispatch(updateTodosStatus({ index, isDone: value }));
-    toast.success("Update Todo Success");
+    toast.success("Update activity success");
   };
 
   const handleAddTodo = () => {
     if (!newTodo) {
-      return toast.error("Input Ga Boleh Kosong Woi");
+      return toast.error("Input can not be empty");
     }
     dispatch(addTodo({ title: newTodo, isDone: false }));
     setNewTodo("");
-    toast.success("Create New Todo Success");
+    toast.success("Create activity success");
   };
   console.log(newTodo);
   return (
     <>
-      <div className="bg-slate-800 h-screen">
-        <div className="container mx-auto text-white max-w-[800px]">
-          <h1 className="text-center text-3xl font-bold">Chores Todo List</h1>
+      <div className=" bg-[url('/fire.jpg')]  h-screen w-full mx-auto grid grid-cols-2">
+        <div className="overflow-x-auto w-3/4 mx-auto text-center mt-5">
+          <h3 className="mx-auto w-full text-center text-3xl font-bold mb-5">
+            Activity List
+          </h3>
 
-          <table className="w-full">
+          <table className="table w-full">
             {todos.map((todo, index) => {
               return (
-                <tr key={index}>
-                  <td>
-                    <input
-                      type="checkbox"
-                      checked={todo.isDone}
-                      onChange={(e) => handleIsDone(index, e.target.checked)} //checkbox ambil inputnya dari checked
-                    />
-                  </td>
-                  <td>
-                    <p className={todo.isDone ? "line-through" : ""}>
-                      {todo.title}
-                    </p>
-                  </td>
-                  <td>
-                    <button onClick={() => handleDelete(index)}>Delete</button>
-                  </td>
-                </tr>
+                <tbody key={index}>
+                  {/* row 1 */}
+                  <tr>
+                    <th>
+                      <label>
+                        <input
+                          type="checkbox"
+                          checked={todo.isDone}
+                          onChange={(e) =>
+                            handleIsDone(index, e.target.checked)
+                          } //checkbox ambil inputnya dari checked
+                          className="checkbox"
+                        />
+                      </label>
+                    </th>
+                    <td>
+                      <div className="flex items-center gap-3">
+                        <div className="avatar">
+                          <div className="mask mask-squircle w-12 h-12">
+                            <img
+                              src="/activity.jpg"
+                              alt="Avatar Tailwind CSS Component"
+                            />
+                          </div>
+                        </div>
+                        <div>
+                          <div className="font-bold">
+                            <p className={todo.isDone ? "line-through" : ""}>
+                              {todo.title}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+
+                    <th>
+                      <button
+                        className="btn btn-ghost btn-xs"
+                        onClick={() => handleDelete(index)}
+                      >
+                        Delete
+                      </button>
+                    </th>
+                  </tr>
+                </tbody>
               );
             })}
-          </table>
-          <h1 className="text-center text-3xl font-bold">
-            Done: {getTodosDone().length}
-          </h1>
+            {/* head */}
 
-          <div>
-            {/* Kita akan buat apa yang kita ketik disini bakal ditampung ke dalam state */}
-            <input
-              type="text"
-              className="w-full text-black"
-              //Hafalan (untuk mengakses sebuah value dari input text)
-              onChange={(e) => setNewTodo(e.target.value)}
-              value={newTodo}
-            />
-            <button
-              className="bg-slate-400 p-2 rounded-xl mt-2"
-              onClick={handleAddTodo}
-            >
-              {/* handleAddtodo bisa langsung dipanggil karena tidak butuh parameter */}
-              Add Todo
-            </button>
-          </div>
+            {/* foot */}
+          </table>
+        </div>
+        <div className="mx-auto w-3/4 mt-5">
+          <h1 className="text-3xl font-bold">Done: {getTodosDone().length}</h1>
+          {/* Kita akan buat apa yang kita ketik disini bakal ditampung ke dalam state */}
+          <input
+            type="text"
+            placeholder="Type Your Activity"
+            className="input input-bordered input-primary w-full max-w-xs mt-5 mb-3"
+            //Hafalan (untuk mengakses sebuah value dari input text)
+            onChange={(e) => setNewTodo(e.target.value)}
+            value={newTodo}
+          />
+          <br />
+          <button className="btn btn-neutral" onClick={handleAddTodo}>
+            {/* handleAddtodo bisa langsung dipanggil karena tidak butuh parameter */}
+            Add Activity
+          </button>
         </div>
       </div>
     </>
